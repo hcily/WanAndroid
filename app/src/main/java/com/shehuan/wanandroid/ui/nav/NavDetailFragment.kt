@@ -7,7 +7,7 @@ import com.shehuan.wanandroid.bean.navi.ArticlesItem
 import com.shehuan.wanandroid.ui.article.ArticleActivity
 import com.shehuan.wanandroid.utils.addCommonView
 import kotlinx.android.synthetic.main.fragment_navi_detail.*
-
+import java.util.ArrayList
 private const val ARTICLES = "articles"
 
 class NavDetailFragment : BaseFragment() {

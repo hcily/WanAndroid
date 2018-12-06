@@ -12,6 +12,7 @@ import com.shehuan.statusview.StatusView
 import com.shehuan.statusview.StatusViewBuilder
 import com.shehuan.wanandroid.R
 import com.shehuan.wanandroid.base.activity.BaseActivity
+import com.shehuan.wanandroid.utils.LogUtil
 
 abstract class BaseFragment : Fragment() {
     lateinit var mContext: BaseActivity
@@ -32,26 +33,30 @@ abstract class BaseFragment : Fragment() {
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
+        LogUtil.d("BaseFragment", " ${this} onAttach ")
         mContext = context as BaseActivity
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        LogUtil.d("BaseFragment", " ${this} onCreate ")
         initData()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        LogUtil.d("BaseFragment", " ${this} onCreateView ")
         return inflater.inflate(initLayoutResID(), container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        LogUtil.d("BaseFragment", " ${this} onViewCreated ")
         initView()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
+        LogUtil.d("BaseFragment", " ${this} onActivityCreated ")
         isViewCreated = true
         tryLoadData()
     }
@@ -61,6 +66,7 @@ abstract class BaseFragment : Fragment() {
      */
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
+        LogUtil.d("BaseFragment", " ${this} setUserVisibleHint ${isVisibleToUser} ")
         this.isVisibleToUser = isVisibleToUser
         tryLoadData()
     }
@@ -70,6 +76,7 @@ abstract class BaseFragment : Fragment() {
      */
     override fun onHiddenChanged(hidden: Boolean) {
         super.onHiddenChanged(hidden)
+        LogUtil.d("BaseFragment", " ${this} onHiddenChanged ${hidden} ")
         isFragmentHidden = hidden
         if (!hidden) {
             tryLoadData1()
@@ -81,6 +88,7 @@ abstract class BaseFragment : Fragment() {
      */
     private fun isParentVisible(): Boolean {
         val fragment: Fragment? = parentFragment
+        LogUtil.d("BaseFragment", " ${this} isParentVisible ${fragment}")
         return fragment == null || (fragment is BaseFragment && fragment.isVisibleToUser)
     }
 
@@ -88,6 +96,7 @@ abstract class BaseFragment : Fragment() {
      * ViewPager场景下，当前fragment可见，如果其子fragment也可见，则尝试让子fragment加载请求
      */
     private fun dispatchParentVisibleState() {
+        LogUtil.d("BaseFragment", " ${this} dispatchParentVisibleState ")
         val fragmentManager: FragmentManager = childFragmentManager
         val fragments: List<Fragment> = fragmentManager.fragments
         if (fragments.isEmpty()) {
@@ -110,6 +119,7 @@ abstract class BaseFragment : Fragment() {
      */
     protected fun tryLoadData() {
         if (isViewCreated && isVisibleToUser && isParentVisible() && (isNeedReload() || !isDataLoaded)) {
+            LogUtil.d("BaseFragment", " ${this} tryLoadData ")
             initLoad()
             isDataLoaded = true
             dispatchParentVisibleState()
@@ -122,6 +132,7 @@ abstract class BaseFragment : Fragment() {
     private fun dispatchParentHiddenState() {
         val fragmentManager: FragmentManager = childFragmentManager
         val fragments: List<Fragment> = fragmentManager.fragments
+        LogUtil.d("BaseFragment", " ${this} dispatchParentHiddenState ${fragments}")
         if (fragments.isEmpty()) {
             return
         }
@@ -137,6 +148,7 @@ abstract class BaseFragment : Fragment() {
      */
     private fun isParentHidden(): Boolean {
         val fragment: Fragment? = parentFragment
+        LogUtil.d("BaseFragment", " ${this} isParentHidden ${fragment}")
         if (fragment == null) {
             return false
         } else if (fragment is BaseFragment && !fragment.isHidden) {
@@ -150,6 +162,7 @@ abstract class BaseFragment : Fragment() {
      */
     protected fun tryLoadData1() {
         if (!isParentHidden() && (isNeedReload() || !isDataLoaded)) {
+            LogUtil.d("BaseFragment", " ${this} tryLoadData1 ")
             initLoad()
             isDataLoaded = true
             dispatchParentHiddenState()
@@ -157,6 +170,7 @@ abstract class BaseFragment : Fragment() {
     }
 
     override fun onDestroy() {
+        LogUtil.d("BaseFragment", " ${this} onDestroy ")
         isViewCreated = false
         isVisibleToUser = false
         isDataLoaded = false
