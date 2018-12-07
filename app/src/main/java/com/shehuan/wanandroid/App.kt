@@ -1,9 +1,9 @@
 package com.shehuan.wanandroid
 
-import android.app.Application
+import androidx.multidex.MultiDexApplication
 import org.litepal.LitePal
 
-class App : Application() {
+class App : MultiDexApplication() {
 
     override fun onCreate() {
         super.onCreate()
