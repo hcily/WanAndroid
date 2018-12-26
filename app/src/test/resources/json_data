@@ -1,0 +1,20 @@
+{
+    "code":1001,
+    "data":{
+        "id":123,
+        "name":"Justin",
+        "gender":1,
+        "songs":[
+            {
+                "id":1234,
+                "name":"Tell Me Why",
+                "singerId":123
+            },
+            {
+                "id":12345,
+                "name":"One Time",
+                "singerId":123
+            }
+        ]
+    }
+}
