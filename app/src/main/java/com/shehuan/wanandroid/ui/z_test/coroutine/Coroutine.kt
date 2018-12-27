@@ -1,7 +1,8 @@
 package com.shehuan.wanandroid.ui.z_test.coroutine
 
+import android.util.Log
+import com.shehuan.wanandroid.ui.z_test.TAG
 import com.shehuan.wanandroid.ui.z_test.asynctask.excuteAsyncTask
-import kotlin.coroutines.experimental.EmptyCoroutineContext
 import kotlin.coroutines.experimental.startCoroutine
 import kotlin.coroutines.experimental.suspendCoroutine
 
@@ -13,7 +14,7 @@ import kotlin.coroutines.experimental.suspendCoroutine
  * 开启协程
  */
 fun startCoroutine(block: suspend () -> Unit) {
-    block.startCoroutine((SelfContinuation(EmptyCoroutineContext)))
+    block.startCoroutine((SelfContinuation(SelfCoroutineContext())))
 }
 
 /**
@@ -22,6 +23,7 @@ fun startCoroutine(block: suspend () -> Unit) {
 suspend fun <T> startAsyncTask(block: () -> T) = suspendCoroutine<T> { continuation ->
     excuteAsyncTask {
         try {
+            Log.d(TAG,"${Thread.currentThread()}-> 异步任务进行中... ")
             continuation.resume((block()))
         } catch (e: Exception) {
             continuation.resumeWithException(e)

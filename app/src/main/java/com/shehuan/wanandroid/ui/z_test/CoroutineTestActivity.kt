@@ -13,12 +13,13 @@ import kotlinx.android.synthetic.main.activity_coroutine_test.*
 
 const val PIC_URL = "https://p2.ssl.qhimg.com/t01d91636862957f76e.png"
 
+const val TAG ="CoroutineTestActivity"
 /**
  * 协程测试用例
  */
 class CoroutineTestActivity : AppCompatActivity() {
 
-     val TAG ="CoroutineTestActivity"
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
