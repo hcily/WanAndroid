@@ -16,17 +16,13 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".ui.main.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".ui.splash.SplashActivity"
             android:theme="@style/FullScreenTheme" />
         <activity android:name=".ui.login.LoginActivity" />
-        <!--<activity android:name=".ui.main.MainActivity" />-->
+        <!-- <activity android:name=".ui.main.MainActivity" /> -->
         <activity android:name=".ui.about.AboutActivity" />
         <activity
             android:name=".ui.query.QueryActivity"
@@ -38,6 +34,16 @@
         <activity android:name=".ui.article.ArticleActivity" />
         <activity android:name=".ui.collection.MyCollectionActivity" />
         <activity android:name=".ui.register.RegisterActivity" />
+        <activity
+            android:name=".ui.z_test.CoroutineTestActivity"
+            android:label="@string/title_activity_coroutine_test"
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
